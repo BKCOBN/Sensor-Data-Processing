@@ -61,7 +61,7 @@ Then re-run the script.
 - The input folder must contain files named exactly `RDL_YYYY-MM-DD_USB0.txt`, one per day.
 - Files are processed in alphabetical order, which is the same as chronological order given the naming convention.
 - Each file may contain repeated column-header rows (the logger writes one at the start of every 30-minute block). These are automatically skipped.
-- If the logger rebooted during the month, its startup banner (device name, firmware info, wire calibration values, etc.) is printed to the log. These lines are automatically ignored — they are identified by the fact that their first token is not a valid `YYYY/MM/DD` sensor date.
+- If the logger rebooted during the month, its startup banner (device name, firmware info, wire calibration values, etc.) is printed to the log. These lines are automatically ignored, they are identified by the fact that their first token is not a valid `YYYY/MM/DD` sensor date.
 - Sensor columns T07 and T08 are excluded from the output because they frequently contain invalid readings.
 
 ### Output format
