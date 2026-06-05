@@ -1,6 +1,6 @@
 # CONFIGURATION — edit these two lines before running
-INPUT_FOLDER = r"USB0\2025-11"  # path to the month folder containing TXT files
-OUTPUT_FILE  = r"November_generated.xlsx"  # output workbook path
+INPUT_FOLDER = r"USB0\2026-01"  # path to the month folder containing TXT files
+OUTPUT_FILE  = r"January_generated.xlsx"  # output workbook path
 
 import re
 from datetime import datetime, date, time
@@ -30,6 +30,10 @@ def parse_line(line):
     # data line: DATA_DATE DATA_TIME RECORD# T01 T02 T03 T04 T05 T06 T07 T08
     parts = remainder.split()
     if len(parts) < 9:
+        return (wc_date, wc_time, 'blank', None)
+    # Guard against boot/startup messages that have 9+ tokens but aren't data rows
+    # (e.g. "Jericho Lab inc. // ..." or "Extension wire, C1 to C8 (ohms): 0 ,0 ...")
+    if not re.match(r'^\d{4}/\d{2}/\d{2}$', parts[0]):
         return (wc_date, wc_time, 'blank', None)
 
     fields = []
